@@ -117,6 +117,8 @@ Ja se toimii. Eli ongelma on yhteydessä siihen, etten ole osannut yhdistää ko
 
 Tässä kohtaa tiedän sen, että postfix toimii paikallisesti kummassakin koneessa. Tiedän myös, että aloittaessani koodin kirjoittamisen ja saltin käyttämisen oikeasti, minun kannattaa tehdä main.cf-tiedostosta jinja-template, jotta minun ei tarvitse tehdä erillistä tiedostoa jokaiselle eri minionille. Voin siis todennäköisesti korvata tiedostossa hostnamen "{{ grains['host']". 
 
+
+### Portit?
 Seuraavaksi ratkaisua lähdin hakemaan sekä porttien, että verkkojen sallimisen kautta. Minun kohdalla ni Postfix käyttää SMTP, eli simple mail transfer protokollaa, eli avoimena on oltava portti 25. 
 
                                     $ nc -zv host_nimi 25
@@ -127,6 +129,8 @@ Seuraavaksi ratkaisua lähdin hakemaan sekä porttien, että verkkojen sallimise
 
 Portit ovat siis auki.
 
+
+### IP?
 IP-osoitteiden salliminen olisi vuorossa. Koska main.cf-tiedostossa on mynetworks-kohta, oletin siellä olevan vastaus. Etsin netistä tietoa, mitä siinä kohdassa kuuluu olla. Postifix Basic Configuration () ohjeessa mainitaan kohta:
 
 "mynetworks = 127.0.0.0/8 168.100.189.2/28 (authorize local networks)" 
@@ -143,7 +147,10 @@ Käynnistin koneissa Postfixin uudelleen. Sitten kokeilin lähettää minionille
 
 Se ei toiminut. Oli aika tutkia lisää. En löytänyt mitään suoraa vastausta, sillä monissa ohjeissa ei puhuttu kahden koneen keskustelemisesta ilman, että olisi jokin ulkoinen "relayhost" tai vastaava. Joten kysyin tekoälyltä, missä ongelma voisi olla.
 
-"I have a postifix problem. I have two virtual computers set up using vagrant. I have configured my postfix main.cf file enough, so that i can send post inside a machine. Let's say machines are called machine1 and machine2. I would like to have the postfix to be able to send post between these two. 
+
+### Väärä osoite? Hosts?
+
+"I have a postfix problem. I have two virtual computers set up using vagrant. I have configured my postfix main.cf file enough, so that i can send post inside a machine. Let's say machines are called machine1 and machine2. I would like to have the postfix to be able to send post between these two. 
 
 Currently: A user in machine1 can send post to another user in machine1
 
@@ -175,6 +182,9 @@ Sain vahingossa ChatGPT:ltä yhden ehdotuksen. Olin ilmeisesti tekoälyn mukaan 
 
 Mutta ei se ollut. En tiennyt oliko ongelma oikeasti se vai keksikö tekoäly itse koko jutun. Aion pitää mielessä, mutta oletin sen olleen vain jokin tekoälyn "ajatusvirhe."
 
+
+### Hostnames?
+
 Seuraava kysymys olisi, jos lisäisin "mydestinations" osioon myös hostnamet ja postfixin "myhostname" nimet. Koska seuraamani ohjeen (Postfix, "postfix configuration parameters") mukaan hostnamet on oltava muotoa "host.example.org"
 
 ![image](https://github.com/user-attachments/assets/7476fab1-4f6e-402f-bba7-92bd2404f6c9)
@@ -198,6 +208,8 @@ Ei ollut tämäkään ongelman ydin. Kuitenkin saapuneet postit koneen sisällä
 
 ![image](https://github.com/user-attachments/assets/8b59e4dc-9307-410f-845b-01ad0bdea913)
 
+
+### Myorigin?
 
 Tutkiessani main.cf, huomasin yläosassa kommentin, jossa kerrottiin "See /usr/share/postfix/main.cf.dist for a commented, more complete version". En voi uskoa, että tälläinen on koko ajan ollut edessäni. Siellä eräs ohje oli:
 
