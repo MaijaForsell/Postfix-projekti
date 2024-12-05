@@ -291,3 +291,5 @@ Salt Project, "salt.states.file" (https://docs.saltproject.io/en/latest/ref/stat
 Salt Project, "Using Jinja with Salt" (https://docs.saltproject.io/salt/user-guide/en/latest/topics/jinja.html)
 
 Reddit, "How to lower case return of fqdn grain ?" (https://www.reddit.com/r/saltstack/comments/1axj3wa/how_to_lower_case_return_of_fqdn_grain/)
+
+ChatGPT, (https://chatgpt.com/)
